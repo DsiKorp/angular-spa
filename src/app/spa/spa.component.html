@@ -1,0 +1,120 @@
+<div class="container">
+  <h2>Movie System</h2>
+  <hr />  
+  <div class="container-fluid add-new-class">
+    <label>Add New:</label>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <!-- #myForm referencia local de tipo ngForm -->
+        <form (ngSubmit)="addMovie()" autocomplete="off" [formGroup]="myForm">
+          <!-- title -->
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label">Title:</label>
+            <div class="col-sm-9">
+              <!-- ngModel para decirle que son del formulario, y pide el name -->
+              <input type="text" class="form-control" placeholder="Title" formControlName="title" />
+              <span *ngIf="isInvalidField('title')" class="form-text text-danger">Must be 3 letters</span>
+            </div>
+          </div>
+  
+          <!-- year -->
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label">Year:</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" placeholder="Year" formControlName="year" />
+              <span *ngIf="isInvalidField('year')" class="form-text text-danger">The year must be greater than 1900</span>
+            </div>
+          </div>
+          <!-- Genres ngModel customMin es la directiva definida en custom-min.directive.ts  -->
+          <div class="mb-3 row">
+            <label class="col-sm-3 col-form-label">Genres:</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" placeholder="Genres" formControlName="genres" />
+              <span *ngIf="isInvalidField('genres')" class="form-text text-danger">Must be 3 letters</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn btn-primary float-end">
+                Add
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-table (onDelete)="deleteMovie( $event )" [moviesList]="moviesList"></app-table> -->
+
+  <br>
+  <div class="container-fluid container-table">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-responsive">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+  
+      <!-- title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+  
+      <!-- year Column -->
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+  
+      <!-- genres Column -->
+      <ng-container matColumnDef="genres">
+        <th mat-header-cell *matHeaderCellDef> Genres </th>
+        <td mat-cell *matCellDef="let element"> {{element.genres}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" class="action-link"> 
+          <a type="button" class="btn btn-outline-danger" (click)="deleteMovie(element.position)">Delete</a>
+        </td>
+      </ng-container>
+  
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  
+    </table>
+  
+  </div>
+  
+  
+<br>
+<h2>Debug:</h2>
+  <div class="row">
+    <div class="col">
+      <hr>
+      <span>Valid</span>
+      <pre>{{ myForm.valid }}</pre>
+      <hr>
+      <span>Pristine</span>
+      <pre>{{ myForm.pristine }}</pre>
+      <hr>
+      <span>Touched</span>
+      <pre>{{ myForm.touched }}</pre>
+      <hr>
+      <span>Form Value</span>
+      <pre>{{ myForm.value | json }}</pre>
+      <hr>
+      <span>moviesList</span> 
+      <pre>{{ moviesList | json }}</pre>
+      <hr>
+    </div>
+  </div>
+</div>
+<hr>

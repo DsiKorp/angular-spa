@@ -1,0 +1,22 @@
+.add-new-class {
+  border: 1px black solid;
+  padding: 25px 67px;
+  /* margin: 0 100px 0 100px; */
+  width: fit-content;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.container-table {
+  width: 60%;
+}
+
+.mat-row:hover > .mat-cell {
+  color:  blue;
+}
