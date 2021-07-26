@@ -20,3 +20,13 @@ th.mat-sort-header-sorted {
 .mat-row:hover > .mat-cell {
   color:  blue;
 }
+
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  table {
+    width: 60%;
+  }
+
+  .container-table {
+    width: 50%;
+  }
+}
